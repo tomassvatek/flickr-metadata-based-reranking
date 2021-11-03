@@ -3,3 +3,5 @@ secrets.txt
 
 # API testing
 api/data.json
+
+.env
