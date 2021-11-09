@@ -1,8 +1,9 @@
-get https://www.flickr.com/services/rest/
+get https://api.flickr.com/services/rest/
     ?method=flickr.photos.search
     &text=car
     &api_key=e7d2c83b23b5c56a06fa546f5080b59b
     &format=json
     &has_geo=true
-    &per_page=500
+    &per_page=5
+    &nojsoncallback=1,
     &extras=date_taken,geo,url_z,machine_tags
