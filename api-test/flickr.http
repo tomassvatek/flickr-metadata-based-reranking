@@ -6,4 +6,4 @@ get https://api.flickr.com/services/rest/
     &has_geo=true
     &per_page=5
     &nojsoncallback=1,
-    &extras=date_taken,geo,url_z,machine_tags
+    &extras=date_taken,owner_name,geo,url_z,machine_tags

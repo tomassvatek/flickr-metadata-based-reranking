@@ -6,6 +6,7 @@ import os
 from core.FlickrClient import FlickrClient
 from core.FileStorage import FileStorage
 
+# TODO: Rename appName
 app = Flask('test')
 load_dotenv()
 
