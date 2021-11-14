@@ -1,7 +1,7 @@
 get https://www.flickr.com/services/rest/
     ?method=flickr.photos.search
     &text=car
-    &api_key=e7d2c83b23b5c56a06fa546f5080b59b
+    &api_key=******
     &format=json
     &has_geo=true
     &per_page=500
