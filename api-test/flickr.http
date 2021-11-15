@@ -7,3 +7,10 @@ get https://api.flickr.com/services/rest/
     &per_page=5
     &nojsoncallback=1,
     &extras=date_taken,owner_name,geo,url_z,machine_tags
+
+###
+get http://127.0.0.1:5000/images/car
+    ?latitude=50.181640673048726
+    &title=car
+    &longitude=14.465727564020902
+    &height_z=750

@@ -1,13 +1,13 @@
 from typing import _SpecialForm, Iterable
-from number_distance import number_distance
-from rescale_value import rescale_value
-from edit_distance import levenshtein_distance
-from great_circle_distance import great_circle
-from ImageMetadata import ImageMetadata, GeoLocation
+from reranking.number_distance import number_distance
+from reranking.rescale_value import rescale_value
+from reranking.edit_distance import levenshtein_distance
+from reranking.great_circle_distance import great_circle
+from models.ImageMetadata import ImageMetadata, GeoLocation
 
 
 # for test we just use these attributes: name, GEO, number, heigh_z
-def rerank(reranking_input: ImageMetadata, image: ImageMetadata) -> int:
+def __rerank(reranking_input: ImageMetadata, image: ImageMetadata) -> int:
     image_name_distance = levenshtein_distance(
         image.image_name, reranking_input.image_name)
     image_name_distance_res = rescale_value(
@@ -82,7 +82,7 @@ def rerank_dataset(reranking_input: ImageMetadata, images: Iterable[ImageMetadat
     # print(sorted(results, key=lambda item: item['image_name_dist_scaled']))
 
 
-def test_reranking():
+def __test_reranking():
     # Prepare data
     # Praha 50.07656000914572, 14.434791191466752
     location = GeoLocation(lat=50.07656000914572, lon=14.434791191466752)
@@ -114,6 +114,3 @@ def test_reranking():
     #     result[image.image_name] = rerank(user_data, image)
 
     # print(result)
-
-
-test_reranking()

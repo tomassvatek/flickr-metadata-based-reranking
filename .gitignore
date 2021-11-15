@@ -7,6 +7,8 @@ api-test/data.json
 # Python server
 __pycache__
 server/venv
-server/data
+server/temp
 
 iv-1.pdf
+
+.DS_STORE
