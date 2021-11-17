@@ -1,5 +1,5 @@
-import { Box, TextField } from "@mui/material";
-import FilterRow from "./FilterRow";
+import { Box, Input } from '@chakra-ui/react';
+import FilterRow from './FilterRow';
 
 function FilterList() {
   return (
@@ -7,12 +7,12 @@ function FilterList() {
       <FilterRow
         name="Image description"
         placeholder="What are you looking for?"
-        control={<TextField variant="outlined" label="Image name" />}
+        control={<Input placeholder="Basic usage" />}
       />
       <FilterRow
         name="Image description"
         placeholder="What are you looking for?"
-        control={<TextField variant="outlined" label="Image name" />}
+        control={<Input placeholder="Basic usage" />}
       />
     </Box>
   );

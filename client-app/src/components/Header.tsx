@@ -1,12 +1,12 @@
-import { Container, Typography } from "@mui/material";
+import { Center, Heading } from '@chakra-ui/react';
 
 function Header() {
   return (
-    <Container sx={{
-        textAlign: 'center'
-    }}>
-      <Typography variant="h2">Flickr metadata re-reranking</Typography>
-    </Container>
+    <Center>
+      <Heading as="h2" size="3xl">
+        Flickr metadata re-reranking
+      </Heading>
+    </Center>
   );
 }
 

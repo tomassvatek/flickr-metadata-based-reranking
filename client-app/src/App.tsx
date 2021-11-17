@@ -1,14 +1,20 @@
-import "./App.css";
-import { Container } from "@mui/material";
-import Header from "./components/Header";
-import FilterList from "./components/FilterList";
+import './App.css';
+import Header from './components/Header';
+import FilterList from './components/FilterList';
+import { ChakraProvider, Container } from '@chakra-ui/react';
+import ImageList from './features/Images/ImageList';
+import SearchBar from './features/Search/SearchBar';
 
 function App() {
   return (
-    <Container style={{ padding: "25px" }}>
-      <Header></Header>
-      <FilterList />
-    </Container>
+    <ChakraProvider>
+      <Container p="25">
+        <Header />
+        <SearchBar />
+        <FilterList />
+        <ImageList />
+      </Container>
+    </ChakraProvider>
   );
 }
 
