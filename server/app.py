@@ -1,14 +1,16 @@
 import json
 import dotenv
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response
+from flask_cors import CORS
 
 from data.FlickrClient import FlickrClient
 from reranking.rerank_dataset import rerank_dataset
 from models.ImageMetadata import ImageMetadata, GeoLocation
 
 # TODO: Rename appName
-app = Flask('test')
+app = Flask(__name__)
+CORS(app)
 dotenv.load_dotenv()
 
 
@@ -40,11 +42,8 @@ def search_images(searchValue):
 
     user_reranking = map_image(request.args)
     # print(images_metada)
-    print('ok')
     result = rerank_dataset(
         reranking_input=user_reranking, images=images_metadata)
-    print(result)
-
     # storage = FileStorage()
     # storage.create_file(file_name="flickr-data.json", data=json.dumps(result))
-    return json.dumps(result)
+    return Response(status=200, response=json.dumps(result), mimetype='application/json')

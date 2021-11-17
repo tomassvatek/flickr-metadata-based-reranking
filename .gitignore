@@ -1,14 +1,3 @@
-# config 
-.env
-
-# API testing
-api-test/data.json
-
-# Python server
-__pycache__
-server/venv
-server/temp
-
 iv-1.pdf
-
 .DS_STORE
+api-test/data.json
