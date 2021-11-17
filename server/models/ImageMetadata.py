@@ -9,6 +9,7 @@ class GeoLocation:
 
 @dataclass
 class ImageMetadata:
-    image_name: str
+    title: str
+    url: str
     location: GeoLocation
     height: int

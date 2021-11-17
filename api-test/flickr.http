@@ -11,6 +11,6 @@ get https://api.flickr.com/services/rest/
 ###
 get http://127.0.0.1:5000/images/car
     ?latitude=50.181640673048726
-    &title=car
+    &title=Tesla
     &longitude=14.465727564020902
     &height_z=750

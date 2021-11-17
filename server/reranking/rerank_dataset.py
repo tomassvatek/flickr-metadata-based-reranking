@@ -44,7 +44,7 @@ def rerank_dataset(reranking_input: ImageMetadata, images: Iterable[ImageMetadat
     results = []
     for image in images:
         levenshtein_dist = levenshtein_distance(
-            image.image_name, reranking_input.image_name)
+            image.title, reranking_input.title)
         min_image_name_distance = min(
             min_image_name_distance, levenshtein_dist)
         max_image_name_distance = max(
@@ -62,24 +62,32 @@ def rerank_dataset(reranking_input: ImageMetadata, images: Iterable[ImageMetadat
         max_height_z_distance = max(max_height_z_distance, numb_distance)
 
         rerank_result = {
-            'name': image.image_name,
+            'image_title': image.title,
+            'image_url': image.url,
             'image_name_dist': levenshtein_dist,
             'geo_distance': great_circle_distance,
             'height_distance': numb_distance,
         }
-
         results.append(rerank_result)
 
-    print(f'Min {min_location_distance}')
-    print(f'Max {max_location_distance}')
     for result in results:
-        result['image_name_dist_scaled'] = rescale_value(
+        # Just for debugging
+        result['image_title_scaled'] = rescale_value(
             min_image_name_distance, max_image_name_distance, result['image_name_dist'])
         result['geo_scaled'] = rescale_value(
             min_location_distance, max_location_distance, result['geo_distance'])
+        result['height_scaled'] = rescale_value(
+            min_height_z_distance, max_height_z_distance, result['height_distance'])
 
-    print(results)
-    # print(sorted(results, key=lambda item: item['image_name_dist_scaled']))
+        result['reranking_score'] = rescale_value(
+            min_image_name_distance, max_image_name_distance, result['image_name_dist'])
+        + rescale_value(min_location_distance,
+                        max_location_distance, result['geo_distance'])
+        + rescale_value(
+            min_height_z_distance, max_height_z_distance, result['height_distance'])
+
+    sorted_result = sorted(results, key=lambda item: item['reranking_score'])
+    return sorted_result
 
 
 def __test_reranking():
