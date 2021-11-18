@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/layout';
+import { Box, Flex, HStack, VStack } from '@chakra-ui/layout';
 import { AspectRatio, Image, Text } from '@chakra-ui/react';
 import { ImageItem as Item } from '../types';
 
@@ -9,20 +9,26 @@ type ImageItemProps = {
 function ImageItem({ item }: ImageItemProps) {
   return (
     <Box>
-      <Flex justifyContent="space-between">
-        <Text>Image distance</Text>
-        <Text>{item.image_title}</Text>
-        <Text>{item.image_name_dist}</Text>
-        <Text>{item.image_title_scaled}</Text>
-      </Flex>
-      <Flex justifyContent="space-between">
-        <Text>GEO distance</Text>
-        <Text>{item.geo_distance} km</Text>
-        <Text>{item.geo_scaled}</Text>
-      </Flex>
-      <AspectRatio maxW="400px" ratio={4 / 3}>
-        <Image src={item.image_url} alt={item.image_title} objectFit="cover" />
+      <AspectRatio width="200px" maxW="200px" ratio={4 / 3} mr="3">
+        <Image
+          src={item.image_url}
+          alt={item.image_title}
+          objectFit="cover"
+          borderRadius="5"
+        />
       </AspectRatio>
+      <Box mt="2">
+        <HStack align="center">
+          <Text color="grey.300" fontWeight="600">
+            {item.image_title} by John Doe
+          </Text>
+        </HStack>
+        <HStack>
+          <Text color="grey.300" fontSize="xs">
+            Re-ranking score is {item.reranking_score}
+          </Text>
+        </HStack>
+      </Box>
     </Box>
   );
 }

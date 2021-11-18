@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/layout';
+import { SimpleGrid } from '@chakra-ui/layout';
 import { ImageItem as Item } from '../types';
 import ImageItem from './ImageItem';
 
@@ -8,11 +8,11 @@ type ItemListProps = {
 
 function ItemList({ items }: ItemListProps) {
   return (
-    <Box>
+    <SimpleGrid columns={5} spacingX="2" spacingY="5">
       {items.map((item) => (
         <ImageItem item={item} />
       ))}
-    </Box>
+    </SimpleGrid>
   );
 }
 
