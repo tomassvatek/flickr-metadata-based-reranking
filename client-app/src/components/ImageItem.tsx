@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, VStack } from '@chakra-ui/layout';
+import { Box, HStack } from '@chakra-ui/layout';
 import { AspectRatio, Image, Text } from '@chakra-ui/react';
 import { ImageItem as Item } from '../types';
 

@@ -8,7 +8,7 @@ type MapProps = GoogleMapReact.Props & {
 };
 
 function Map({ defaultCenter, defaultZoom, lat, lng, ...props }: MapProps) {
-  const apiKey = process.env.GOOGLE_API_KEY as string;
+  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY as string;
 
   return (
     <Box h="450" w="100%">
