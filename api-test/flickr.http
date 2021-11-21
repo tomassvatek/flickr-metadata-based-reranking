@@ -1,10 +1,10 @@
 get https://api.flickr.com/services/rest/
     ?method=flickr.photos.search
-    &text=car
+    &text=Tesla
     &api_key=e7d2c83b23b5c56a06fa546f5080b59b
     &format=json
     &has_geo=true
-    &per_page=5
+    &per_page=150
     &nojsoncallback=1,
     &extras=date_taken,owner_name,geo,url_z,machine_tags
 

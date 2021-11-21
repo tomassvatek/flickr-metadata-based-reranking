@@ -1,5 +1,5 @@
 import { Box, HStack } from '@chakra-ui/layout';
-import { AspectRatio, Image, Text } from '@chakra-ui/react';
+import { AspectRatio, Image, Link, Text } from '@chakra-ui/react';
 import { ImageItem as Item } from '../types';
 
 type ImageItemProps = {
@@ -9,14 +9,16 @@ type ImageItemProps = {
 function ImageItem({ item }: ImageItemProps) {
   return (
     <Box>
-      <AspectRatio width="200px" maxW="200px" ratio={4 / 3} mr="3">
-        <Image
-          src={item.image_url}
-          alt={item.image_title}
-          objectFit="cover"
-          borderRadius="5"
-        />
-      </AspectRatio>
+      <Link href={item.image_url} isExternal>
+        <AspectRatio width="200px" maxW="200px" ratio={4 / 3} mr="3">
+          <Image
+            src={item.image_url}
+            alt={item.image_title}
+            objectFit="cover"
+            borderRadius="5"
+          />
+        </AspectRatio>
+      </Link>
       <Box mt="2">
         <HStack align="center">
           <Text color="grey.300" fontWeight="600">

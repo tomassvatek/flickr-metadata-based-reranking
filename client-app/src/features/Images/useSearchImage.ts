@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ImageItem } from '../../types';
+import { FilterValues, useFilter } from '../Filter/filterAtom';
 import { useSearch } from '../Search/searchAtom';
 
 type RerankingParams = {
@@ -33,24 +34,41 @@ function useSearchImage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
   const [searchValue] = useSearch();
+  // const [filter] = useFilter();
 
-  useEffect(() => {
-    if (searchValue?.length < 3) return;
-
-    (async function () {
+  const handleSubmit = useCallback(
+    async (formValues: FilterValues) => {
       try {
         setLoading(true);
-        const images = await fetchImages(searchValue);
+        const images = await fetchImages(searchValue, formValues);
         setImages(images);
       } catch (err) {
         setError(err as Error);
       } finally {
         setLoading(false);
       }
-    })();
-  }, [searchValue]);
+    },
+    [searchValue]
+  );
 
-  return { images, loading, error };
+  // useEffect(() => {
+  //   if (searchValue?.length < 3) return;
+  //   console.log(filter);
+
+  //   (async function () {
+  //     try {
+  //       setLoading(true);
+  //       const images = await fetchImages(searchValue, filter);
+  //       setImages(images);
+  //     } catch (err) {
+  //       setError(err as Error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   })();
+  // }, [searchValue, filter]);
+
+  return { images, loading, error, handleSubmit };
 }
 
 export default useSearchImage;

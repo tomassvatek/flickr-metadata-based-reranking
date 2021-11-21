@@ -14,28 +14,48 @@ import {
   SliderTrack,
   VStack,
 } from '@chakra-ui/react';
-import DatePicker from './DatePicker/DatePicker';
-import FilterRow from './FilterRow';
-import GeoPicker from './Map/GeoPicker';
+import DatePicker from '../../components/DatePicker/DatePicker';
+import FilterRow from '../../components/FilterRow';
+import GeoPicker from '../../components/Map/GeoPicker';
+import { useFilter } from './filterAtom';
 
 function Filter() {
+  const [filter, setFilter] = useFilter();
+
+  // const handleChangeInput = useCallback((event: React.ChangeEvent) => {
+
+  //   // setFilter();
+  // }, []);
+
   return (
     <Box py="5">
       <Heading as="h3" size="xl" textAlign="center" pb="5">
         Re-ranking
       </Heading>
       <VStack spacing="5" align="flex-start" mb="8">
-        <FilterRow name="Image title" control={<Input placeholder="Title" />} />
         <FilterRow
-          name="Image description"
-          control={<Input placeholder="Author" />}
+          name="Image title"
+          control={
+            <Input
+              placeholder="Title"
+              value={filter.title}
+              onChange={(e) => setFilter({ ...filter, title: e.target.value })}
+            />
+          }
+        />
+        <FilterRow
+          name="Author"
+          control={<Input placeholder="Author" value={filter.author} />}
         />
         <FilterRow
           name="Date taken"
           control={
             <DatePicker
               placeholderText="Photo taken"
-              onChange={(date) => console.log(date)}
+              selected={filter.photo_date}
+              onChange={(date: any) => {
+                setFilter({ ...filter, photo_date: date as Date });
+              }}
             />
           }
         />
@@ -45,7 +65,8 @@ function Filter() {
             <NumberInput
               w="100%"
               placeholder="Image height"
-              defaultValue="640"
+              value={filter.height_z}
+              onChange={(e) => setFilter({ ...filter, height_z: +e })}
               min={0}
               max={8000}
             >
@@ -71,7 +92,13 @@ function Filter() {
           </SliderTrack>
           <SliderThumb boxSize={6} />
         </Slider>
-        <GeoPicker />
+        <GeoPicker
+          lat={filter.latitude}
+          lng={filter.longitude}
+          onChange={(lat, lng) => {
+            setFilter({ ...filter, latitude: lat, longitude: lng });
+          }}
+        />
       </Box>
       <Button colorScheme="orange" w="100%" mt="5">
         Re-rank

@@ -5,14 +5,15 @@ import {
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-
 import Map from './Map';
 
-function GeoPicker() {
-  const [latitude, setLatitude] = useState(0);
-  const [longtitude, setLongtitude] = useState(0);
+type GeoPickerProps = {
+  lat: number;
+  lng: number;
+  onChange: (lat: number, lng: number) => void;
+};
 
+function GeoPicker({ lat, lng, onChange: onPositionChange }: GeoPickerProps) {
   return (
     <Box>
       <HStack spacing="4" pb="3">
@@ -25,8 +26,8 @@ function GeoPicker() {
           />
           <Input
             placeholder="Longitude"
-            value={latitude}
-            onChange={(e) => setLatitude(+e.target.value)}
+            value={lat}
+            onChange={(e) => onPositionChange(+e.target.value, lng)}
           />
         </InputGroup>
         <InputGroup>
@@ -38,19 +39,18 @@ function GeoPicker() {
           />
           <Input
             placeholder="Longitude"
-            value={longtitude}
-            onChange={(e) => setLongtitude(+e.target.value)}
+            value={lng}
+            onChange={(e) => onPositionChange(lat, +e.target.value)}
           />
         </InputGroup>
       </HStack>
       <Map
         defaultCenter={{ lat: 10.99835602, lng: 77.01502627 }}
         defaultZoom={11}
-        lat={latitude}
-        lng={longtitude}
+        lat={lat}
+        lng={lng}
         onClick={(e) => {
-          setLatitude(e.lat);
-          setLongtitude(e.lng);
+          onPositionChange(e.lat, e.lng);
         }}
       />
     </Box>
