@@ -20,7 +20,7 @@ def map_image(flickr_image) -> ImageMetadata:
         url=flickr_image.get('url_z', ''),
         location=GeoLocation(
             float(flickr_image['latitude']), float(flickr_image['longitude'])),
-        height=int(flickr_image['height_z'])
+        height=int(flickr_image.get('height_z', 0))
     )
 
 
