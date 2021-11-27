@@ -29,5 +29,5 @@ class FlickrClient:
             'format': 'json',
             'nojsoncallback': '1',
             'has_geo': 'true',
-            'extras': 'date_taken,geo,url_z,machine_tags'
+            'extras': 'date_taken,geo,url_z,machine_tags,owner_name'
         }
