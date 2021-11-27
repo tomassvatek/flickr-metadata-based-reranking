@@ -45,7 +45,7 @@ function Filter() {
         />
         <FilterRow
           name="Author"
-          control={<Input placeholder="Author" value={filter.author} />}
+          control={<Input placeholder="Author" value={filter.ownername} />}
         />
         <FilterRow
           name="Date taken"
@@ -92,13 +92,13 @@ function Filter() {
           </SliderTrack>
           <SliderThumb boxSize={6} />
         </Slider>
-        <GeoPicker
+        {/* <GeoPicker
           lat={filter.latitude}
           lng={filter.longitude}
           onChange={(lat, lng) => {
             setFilter({ ...filter, latitude: lat, longitude: lng });
           }}
-        />
+        /> */}
       </Box>
       <Button colorScheme="orange" w="100%" mt="5">
         Re-rank

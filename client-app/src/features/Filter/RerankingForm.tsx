@@ -30,7 +30,7 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
   } = useForm<FilterValues>({
     defaultValues: {
       title: '',
-      author: '',
+      ownername: '',
       photo_date: new Date(),
       height_z: 0,
       geo_weight: 1,
@@ -60,7 +60,7 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
           <Input id="title" placeholder="Title" {...register('title')} />
 
           <WeightSlider name="author_weight" control={control} />
-          <Input id="author" placeholder="Author" {...register('author')} />
+          <Input id="author" placeholder="Author" {...register('ownername')} />
           {/* <DatePicker
         ref={datePicker.ref}
         name="photo_date"

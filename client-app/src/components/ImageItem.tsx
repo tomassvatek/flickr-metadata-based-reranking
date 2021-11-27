@@ -27,7 +27,7 @@ function ImageItem({ item }: ImageItemProps) {
         </HStack>
         <HStack>
           <Text color="grey.300" fontSize="xs">
-            Re-ranking score is {item.reranking_score}
+            Re-ranking score is {item.total_score}
           </Text>
         </HStack>
       </Box>

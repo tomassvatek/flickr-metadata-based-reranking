@@ -1,7 +1,7 @@
 export type ImageItem = {
   image_title: string;
   image_url: string;
-  reranking_score: string;
+  total_score: string;
   image_name_dist: number;
   image_title_scaled: number;
   geo_distance: number;

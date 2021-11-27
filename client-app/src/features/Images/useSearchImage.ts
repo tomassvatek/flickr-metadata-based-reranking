@@ -12,16 +12,11 @@ type RerankingParams = {
 
 async function fetchImages(
   searchValue: string,
-  searchParams: RerankingParams = {
-    title: searchValue,
-    latitude: 50.07656000914572,
-    longitude: 14.434791191466752,
-    height_z: 500,
-  }
+  rerankingParams: RerankingParams
 ): Promise<ImageItem[]> {
   const url = new URL(`http://127.0.0.1:5000/images/${searchValue}`);
-  Object.keys(searchParams).forEach((key) =>
-    url.searchParams.append(key, (searchParams as any)[key])
+  Object.keys(rerankingParams).forEach((key) =>
+    url.searchParams.append(key, (rerankingParams as any)[key])
   );
 
   const response = await fetch(url.toString());

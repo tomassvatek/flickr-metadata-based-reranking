@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai';
 
 export type FilterValues = {
   title: string;
-  author: string;
+  ownername: string;
   photo_date: Date | null;
   height_z: number;
   latitude: number;
@@ -15,7 +15,7 @@ export type FilterValues = {
 
 const initialValue: FilterValues = {
   title: '',
-  author: '',
+  ownername: '',
   photo_date: new Date(),
   height_z: 0,
   latitude: 0,
