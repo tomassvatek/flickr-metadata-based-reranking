@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+import json
 
 
 @dataclass
@@ -9,14 +10,14 @@ class GeoLocation:
 
 
 @dataclass
-class ImageMetadata:
+class ImageMetadata():
+    image_id: int
     title: str
     url: str
     location: GeoLocation
     height: int
     owner_name: str
     date_taken: datetime
-
 
 @dataclass
 class RerankingData(ImageMetadata):
