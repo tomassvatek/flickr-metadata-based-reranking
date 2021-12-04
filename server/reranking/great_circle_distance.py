@@ -1,6 +1,5 @@
 from math import radians, sin, cos, acos
 
-
 def great_circle(lon1, lat1, lon2, lat2):
     lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
     return 6371 * (

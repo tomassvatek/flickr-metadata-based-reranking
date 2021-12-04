@@ -8,8 +8,6 @@ def levenshtein_distance(token1, token2):
             else:
                 distances[i][j] = min(
                     distances[i][j-1], distances[i-1][j], distances[i-1][j-1]) + 1
-
-    # __print_distance(distances, len(token1), len(token2))
     return distances[len(token1)][len(token2)]
 
 
