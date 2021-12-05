@@ -1,5 +1,4 @@
-# secrets (API key)
-secrets.txt
-
-# API testing
-api/data.json
+iv-1.pdf
+.DS_STORE
+api-test/data.json
+api-test/test.txt

@@ -1,0 +1,18 @@
+get https://api.flickr.com/services/rest/
+    ?method=flickr.photos.search
+    &text=White Christmas
+    &api_key=e7d2c83b23b5c56a06fa546f5080b59b
+    &format=json
+    &has_geo=true
+    &per_page=150
+    &nojsoncallback=1,
+    &extras=date_taken,owner_name,geo,url_z,machine_tags
+
+###
+get http://127.0.0.1:5000/images/car
+    ?latitude=50.181640673048726
+    &title=Tesla
+    &longitude=14.465727564020902
+    &height_z=750
+
+get http://127.0.0.1:5000/images/Car%20dakota/pages/5555
