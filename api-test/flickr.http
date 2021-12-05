@@ -1,6 +1,6 @@
 get https://api.flickr.com/services/rest/
     ?method=flickr.photos.search
-    &text=Tesla
+    &text=White Christmas
     &api_key=e7d2c83b23b5c56a06fa546f5080b59b
     &format=json
     &has_geo=true
@@ -14,3 +14,5 @@ get http://127.0.0.1:5000/images/car
     &title=Tesla
     &longitude=14.465727564020902
     &height_z=750
+
+get http://127.0.0.1:5000/images/Car%20dakota/pages/5555
