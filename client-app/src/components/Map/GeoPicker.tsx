@@ -45,8 +45,8 @@ function GeoPicker({ lat, lng, onChange: onPositionChange }: GeoPickerProps) {
         </InputGroup>
       </HStack>
       <Map
-        defaultCenter={{ lat: 10.99835602, lng: 77.01502627 }}
-        defaultZoom={11}
+        defaultCenter={{ lat: lat, lng: lng }}
+        defaultZoom={12}
         lat={lat}
         lng={lng}
         onClick={(e) => {

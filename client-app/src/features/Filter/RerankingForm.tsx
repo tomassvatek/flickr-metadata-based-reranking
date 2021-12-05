@@ -19,8 +19,14 @@ type RerankingFormProps = {
   onSubmit: (values: FilterValues) => void;
 };
 
+// Dejvice square
+const defaultLocation = {
+  lat: 50.10064046898848,
+  lng: 14.395575076827498,
+};
+
 function RerankingForm({ onSubmit }: RerankingFormProps) {
-  const [position, setPosition] = useState({ lat: 0, lng: 0 });
+  const [position, setPosition] = useState(defaultLocation);
 
   const {
     handleSubmit,

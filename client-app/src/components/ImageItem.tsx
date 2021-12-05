@@ -1,35 +1,49 @@
-import { Box, HStack } from '@chakra-ui/layout';
-import { AspectRatio, Image, Link, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/layout';
+import { AspectRatio, Image, Text } from '@chakra-ui/react';
 import { ImageItem as Item } from '../types';
 
 type ImageItemProps = {
+  rank: number;
   item: Item;
+  onItemClick: (item: Item) => void;
 };
 
-function ImageItem({ item }: ImageItemProps) {
+function ImageItem({ rank, item, onItemClick }: ImageItemProps) {
+  let color = 'black';
+  switch (rank) {
+    case 1:
+      color = 'yellow.500';
+      break;
+    case 2:
+      color = 'gray.500';
+      break;
+    case 3:
+      color = 'orange.600';
+      break;
+  }
+
   return (
     <Box>
-      <Link href={item.image_url} isExternal>
-        <AspectRatio width="200px" maxW="200px" ratio={4 / 3} mr="3">
-          <Image
-            src={item.image_url}
-            alt={item.image_title}
-            objectFit="cover"
-            borderRadius="5"
-          />
-        </AspectRatio>
-      </Link>
+      <AspectRatio
+        ratio={4 / 3}
+        mr="3"
+        cursor="pointer"
+        onClick={() => onItemClick(item)}
+      >
+        <Image
+          src={item.metadata.url}
+          alt={item.metadata.title}
+          objectFit="cover"
+          borderRadius="5"
+        />
+      </AspectRatio>
       <Box mt="2">
-        <HStack align="center">
-          <Text color="grey.300" fontWeight="600">
-            {item.image_title} by John Doe
-          </Text>
-        </HStack>
-        <HStack>
-          <Text color="grey.300" fontSize="xs">
-            Re-ranking score is {item.total_score}
-          </Text>
-        </HStack>
+        <Text fontSize="sm" color={color} fontWeight="600">
+          {rank}. {item.metadata.title} by {item.metadata.owner_name}
+        </Text>
+        <Text fontSize="xs" color="grey.300">
+          Re-ranking score: {Math.round(item.total_score * 10000) / 10000}
+        </Text>
       </Box>
     </Box>
   );

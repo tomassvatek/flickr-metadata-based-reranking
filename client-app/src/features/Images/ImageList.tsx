@@ -1,16 +1,15 @@
 import ItemList from '../../components/ItemList';
-import { Center, Spinner, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Spinner, Text } from '@chakra-ui/react';
 import { ImageItem } from '../../types';
 
 type ImageListProps = {
   images: ImageItem[];
   loading: boolean;
   error: Error | undefined;
+  onLoadMore: () => void;
 };
 
-function ImageList({ images, loading, error }: ImageListProps) {
-  // const { images, loading, error } = useSearchImage();
-
+function ImageList({ images, loading, error, onLoadMore }: ImageListProps) {
   if (error)
     return (
       <Center>
@@ -32,7 +31,16 @@ function ImageList({ images, loading, error }: ImageListProps) {
       </Center>
     );
 
-  return <ItemList items={images} />;
+  return (
+    <Box>
+      <ItemList items={images} />
+      <Center py="5">
+        <Button bg="red.300" color="white" px="20" onClick={onLoadMore}>
+          Load more
+        </Button>
+      </Center>
+    </Box>
+  );
 }
 
 export default ImageList;

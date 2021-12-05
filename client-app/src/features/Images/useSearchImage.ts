@@ -10,6 +10,8 @@ type RerankingParams = {
   height_z: number;
 };
 
+const INIT_PAGE = 2;
+
 async function fetchImages(
   searchValue: string,
   rerankingParams: RerankingParams
@@ -24,14 +26,25 @@ async function fetchImages(
   return images;
 }
 
+async function fetchMoreImages(
+  searchValue: string,
+  page: number,
+) {
+  const url = new URL(`http://127.0.0.1:5000/images/${searchValue}/pages/${page}`);
+
+  const response = await fetch(url.toString());
+  return (await response.json()) as ImageItem[];
+}
+
 function useSearchImage() {
   const [images, setImages] = useState<ImageItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
   const [searchValue] = useSearch();
+  const [page, setPage] = useState(INIT_PAGE);
   // const [filter] = useFilter();
 
-  const handleSubmit = useCallback(
+  const submit = useCallback(
     async (formValues: FilterValues) => {
       try {
         setLoading(true);
@@ -41,11 +54,26 @@ function useSearchImage() {
         setError(err as Error);
       } finally {
         setLoading(false);
+        setPage(INIT_PAGE);
       }
     },
     [searchValue]
   );
 
+  const loadMore = useCallback(
+    async () => {
+      try {
+        const newImages = await fetchMoreImages(searchValue, page);
+        setImages((prev) => [...prev, ...newImages]);
+        setPage((prev) => prev + 1);
+      } catch(e) {
+        setError(e as Error);
+      } finally {
+        // setLoading(false);
+      }
+    },
+    [page, searchValue]
+  )
   // useEffect(() => {
   //   if (searchValue?.length < 3) return;
   //   console.log(filter);
@@ -63,7 +91,7 @@ function useSearchImage() {
   //   })();
   // }, [searchValue, filter]);
 
-  return { images, loading, error, handleSubmit };
+  return { images, loading, error, submit, loadMore };
 }
 
 export default useSearchImage;
