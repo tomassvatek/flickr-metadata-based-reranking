@@ -12,7 +12,7 @@ from models.ImageMetadata import ImageMetadata, RerankingData
 class Reranker:
     def __init__(self, reranking_input: RerankingData, multi_process: bool = None) -> None:
         self.reranking_input = reranking_input
-        self.run_multiprocessing = multi_process if multi_process else self.should_run_multiprocessing()
+        self.run_multiprocessing = multi_process if multi_process is not None else self.should_run_multiprocessing()
         if self.run_multiprocessing:
             print(f'Running re-ranking on multiple cores.')
             manager = Manager()
@@ -33,9 +33,8 @@ class Reranker:
         for item in pure_items:
             for key in list(item.keys()):
                 # ignore descriptive attributes
-                if key == 'image_title' or key == 'image_url' or key == 'image_owner_name':
+                if key == 'metadata':
                     continue
-
                 min_values[key] = min(item[key], min_values.get(key, 1000))
                 max_values[key] = max(item[key], max_values.get(key, 0))
 
@@ -44,12 +43,13 @@ class Reranker:
             total_score = 0
             for key in list(item.keys()):
                 # ignore descriptive attributes
-                if key == 'image_title' or key == 'image_url' or key == 'image_owner_name':
+                if key == 'metadata':
                     continue
-
+    
                 # scaling distance results to [0, 1] range and then divide re-scaled value by weight
+                weight_key = key.replace('distance', 'weight')
                 item[key + '_scaled'] = rescale_value(
-                    min_values[key], max_values[key], item[key]) / reranking_dict[key + '_weight']
+                    min_values[key], max_values[key], item[key]) / reranking_dict[weight_key]
                 total_score += item[key + '_scaled']
             item['total_score'] = total_score
 
@@ -70,26 +70,31 @@ class Reranker:
             for image in images:
                 self.calc_distance(image)
 
-    # for each item's attribute calculate distance based on the attribute 
+    # for each item's attribute calculate distance based on the attribute
     def calc_distance(self, image: ImageMetadata):
-        item = {'image_title': image.title, 'image_url': image.url,
-                'image_owner_name': image.owner_name}
+        item = {'metadata': {'image_id': image.image_id,
+                             'title': image.title, 'url': image.url,
+                             'location': {'lat': image.location.lat, 'lon': image.location.lon},
+                             'height': image.height,
+                             'owner_name': image.owner_name,
+                             'date_taken': image.date_taken
+                             }}
 
         if self.reranking_input.title:
-            item['title'] = levenshtein_distance(
+            item['title_distance'] = levenshtein_distance(
                 image.title, self.reranking_input.title)
 
         if self.reranking_input.owner_name:
-            item['owner_name'] = levenshtein_distance(
+            item['owner_name_distance'] = levenshtein_distance(
                 image.owner_name, self.reranking_input.owner_name)
 
         if self.reranking_input.location:
-            item['location'] = great_circle(
+            item['location_distance'] = great_circle(
                 image.location.lon, image.location.lat,
                 self.reranking_input.location.lon, self.reranking_input.location.lat)
 
         if self.reranking_input.height:
-            item['height'] = number_distance(
+            item['height_distance'] = number_distance(
                 image.height, self.reranking_input.height)
 
         self.items.append(item)

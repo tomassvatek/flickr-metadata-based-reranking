@@ -18,7 +18,7 @@ class AsyncFlickrClient:
             raise 'Maximum number of images per_page is 500.'
 
         connector = aiohttp.TCPConnector(limit=None, ttl_dns_cache=300)
-        session = aiohttp.ClientSession(connector)
+        session = aiohttp.ClientSession(connector=connector)
         responses = {}
         base_url = 'https://www.flickr.com/services/rest'
         # generate URLs 
