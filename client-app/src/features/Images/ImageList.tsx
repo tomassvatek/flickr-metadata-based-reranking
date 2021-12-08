@@ -10,12 +10,14 @@ type ImageListProps = {
 };
 
 function ImageList({ images, loading, error, onLoadMore }: ImageListProps) {
-  if (error)
+  if (error) {
+    console.error(error);
     return (
       <Center>
-        <Text>{error.message}</Text>
+        <Text>Search failed. Please try it again.</Text>
       </Center>
     );
+  }
 
   if (loading)
     return (
