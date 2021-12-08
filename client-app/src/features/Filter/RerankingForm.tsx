@@ -62,11 +62,25 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
           Re-ranking
         </Heading>
         <VStack spacing="5" align="flex-start" mb="8">
-          <WeightSlider name="title_weight" control={control} />
-          <Input id="title" placeholder="Title" {...register('title')} />
+          <Box w="100%">
+            <Heading as="h3" size="sm" textAlign="center" pb="4">
+              Image title
+            </Heading>
+            <WeightSlider name="title_weight" control={control} />
+            <Input id="title" placeholder="Image title" {...register('title')} />
+          </Box>
 
-          <WeightSlider name="author_weight" control={control} />
-          <Input id="author" placeholder="Author" {...register('ownername')} />
+          <Box w="100%">
+            <Heading as="h3" size="sm" textAlign="center" pb="4">
+              Author fullname
+            </Heading>
+            <WeightSlider name="author_weight" control={control} />
+            <Input
+              id="author"
+              placeholder="Author fullname"
+              {...register('ownername')}
+            />
+          </Box>
           {/* <DatePicker
         ref={datePicker.ref}
         name="photo_date"
@@ -112,7 +126,7 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
 
           <Box>
             <Heading as="h3" size="sm" textAlign="center" pb="4">
-              Choose photo GPS location
+              Photo GPS location
             </Heading>
             <WeightSlider name="geo_weight" control={control} />
             <GeoPicker

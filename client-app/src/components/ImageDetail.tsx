@@ -96,12 +96,12 @@ function ImageDetail({ image }: ImageDetailProps) {
               </Td>
             </Tr>
           )}
-          <Tr>
+          {/* <Tr>
             <Td>Image id</Td>
             <Td>{image.metadata.image_id}</Td>
             <Td isNumeric>-</Td>
             <Td isNumeric>-</Td>
-          </Tr>
+          </Tr> */}
         </Tbody>
       </Table>
     </Box>

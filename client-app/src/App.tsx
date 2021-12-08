@@ -2,7 +2,6 @@ import './App.css';
 import Header from './components/Header';
 import { ChakraProvider, Box, Container, Flex } from '@chakra-ui/react';
 import ImageList from './features/Images/ImageList';
-import SearchBar from './features/Search/SearchBar';
 import RerankingForm from './features/Filter/RerankingForm';
 import useSearchImage from './features/Images/useSearchImage';
 
@@ -18,7 +17,7 @@ function App() {
         <Container pb="10">
           <Header />
           {/* <Container> */}
-          <SearchBar />
+          {/* <SearchBar /> */}
         </Container>
         <Flex>
           <Box flex="1" mr="12" maxW="480px">
