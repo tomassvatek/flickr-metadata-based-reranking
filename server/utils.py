@@ -35,7 +35,7 @@ def map_reranking(flickr_image) -> RerankingData:
         location=GeoLocation(
             float(flickr_image['latitude']), float(flickr_image['longitude']) if 'latitude' in flickr_image and 'longitude' in flickr_image else None),
         height=int(flickr_image['height_z']
-                   ) if 'height_z' in flickr_image else None,
+                   ) if 'height_z' in flickr_image and isinstance(flickr_image['height_z'], int) else None,
         owner_name=flickr_image['ownername'] if 'ownername' in flickr_image and flickr_image['ownername'] else None,
         date_taken=flickr_image.get('datetaken', None),
 

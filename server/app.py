@@ -27,8 +27,11 @@ PER_PAGE = 50
 
 def load_data_from_cache(storage, search_value):
     try:
+        time_now = time.time()
         file_name = f'{normalize_file_name(search_value)}.json'
         json_file = storage.load_file(file_name)
+        time_taken = time.time() - time_now
+        print(f'Loading images from storage took {time_taken}.')
         return jsonpickle.decode(json_file)
     except:
         print(f'File {file_name} does not exist. Fetching data from Flickr.')

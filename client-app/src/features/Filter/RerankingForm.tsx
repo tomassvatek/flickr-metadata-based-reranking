@@ -27,6 +27,7 @@ const defaultLocation = {
 
 function RerankingForm({ onSubmit }: RerankingFormProps) {
   const [position, setPosition] = useState(defaultLocation);
+  const [dateTaken, setDateTaken] = useState(new Date());
 
   const {
     handleSubmit,
@@ -37,12 +38,13 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
     defaultValues: {
       title: '',
       ownername: '',
-      photo_date: new Date(),
+      datetaken: new Date(),
       height_z: 0,
       geo_weight: 1,
       title_weight: 1,
       author_weight: 1,
       height_z_weight: 1,
+      date_taken_weight: 1,
     },
   });
 
@@ -51,7 +53,7 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
       ...values,
       latitude: position.lat,
       longitude: position.lng,
-      photo_date: new Date(),
+      datetaken: dateTaken,
     });
   }
 
@@ -67,7 +69,11 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
               Image title
             </Heading>
             <WeightSlider name="title_weight" control={control} />
-            <Input id="title" placeholder="Image title" {...register('title')} />
+            <Input
+              id="title"
+              placeholder="Image title"
+              {...register('title')}
+            />
           </Box>
 
           <Box w="100%">
@@ -81,20 +87,20 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
               {...register('ownername')}
             />
           </Box>
-          {/* <DatePicker
-        ref={datePicker.ref}
-        name="photo_date"
-        placeholderText="Photo taken"
-        onChange={(e) => console.log('change')}
-        onChangeRaw={(date) => {
-          console.log(date);
-          datePicker.onChange(date);
-          console.log(date.target.value);
-          setValue('photo_date', date.target.valueAsDate);
-          //   datePicker.onChange({ target: date, type: date });
-        }}
-        onBlur={datePicker.onBlur}
-      /> */}
+
+          <Box w="100%">
+            <Heading as="h3" size="sm" textAlign="center" pb="4">
+              Date taken
+            </Heading>
+            <WeightSlider name="date_taken_weight" control={control} />
+            <DatePicker
+              name="photo_date"
+              placeholderText="Photo taken"
+              selected={dateTaken}
+              dateFormat="dd.MM.yyyy"
+              onChange={(e) => setDateTaken(e as Date)}
+            />
+          </Box>
 
           <Box w="100%">
             <Heading as="h3" size="sm" textAlign="center" pb="4">

@@ -52,9 +52,9 @@ function Filter() {
           control={
             <DatePicker
               placeholderText="Photo taken"
-              selected={filter.photo_date}
+              selected={filter.datetaken}
               onChange={(date: any) => {
-                setFilter({ ...filter, photo_date: date as Date });
+                setFilter({ ...filter, datetaken: date as Date });
               }}
             />
           }
