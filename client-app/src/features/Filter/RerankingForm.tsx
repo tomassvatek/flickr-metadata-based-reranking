@@ -56,11 +56,11 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
   }
 
   return (
-    <Box py="5">
+    <Box py="5" pt="90px">
       <form onSubmit={handleSubmit(handleSubmitForm)}>
-        <Heading as="h3" size="lg" textAlign="center" pb="5">
+        {/* <Heading as="h3" size="lg" textAlign="center" pb="5">
           Re-ranking
-        </Heading>
+        </Heading> */}
         <VStack spacing="5" align="flex-start" mb="8">
           <Box w="100%">
             <Heading as="h3" size="sm" textAlign="center" pb="4">
