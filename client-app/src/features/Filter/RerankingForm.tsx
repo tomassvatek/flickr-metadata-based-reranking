@@ -58,7 +58,7 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
   return (
     <Box py="5">
       <form onSubmit={handleSubmit(handleSubmitForm)}>
-        <Heading as="h3" size="xl" textAlign="center" pb="5">
+        <Heading as="h3" size="lg" textAlign="center" pb="5">
           Re-ranking
         </Heading>
         <VStack spacing="5" align="flex-start" mb="8">
@@ -82,31 +82,36 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
         onBlur={datePicker.onBlur}
       /> */}
 
-          <WeightSlider name="height_z_weight" control={control} />
-          <Controller
-            name="height_z"
-            control={control}
-            render={({ field }) => {
-              return (
-                <NumberInput
-                  w="100%"
-                  placeholder="Image height"
-                  min={0}
-                  max={8000}
-                  {...field}
-                >
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              );
-            }}
-          />
+          <Box w="100%">
+            <Heading as="h3" size="sm" textAlign="center" pb="4">
+              Image height
+            </Heading>
+            <WeightSlider name="height_z_weight" control={control} />
+            <Controller
+              name="height_z"
+              control={control}
+              render={({ field }) => {
+                return (
+                  <NumberInput
+                    w="100%"
+                    placeholder="Image height"
+                    min={0}
+                    max={8000}
+                    {...field}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                );
+              }}
+            />
+          </Box>
 
           <Box>
-            <Heading as="h3" size="md" textAlign="center" pb="4">
+            <Heading as="h3" size="sm" textAlign="center" pb="4">
               Choose photo GPS location
             </Heading>
             <WeightSlider name="geo_weight" control={control} />
