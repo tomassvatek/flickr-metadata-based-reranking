@@ -36,7 +36,7 @@ function ImageList({ images, loading, error, onLoadMore }: ImageListProps) {
       <ItemList items={images} />
       <Center py="5">
         <Button bg="red.300" color="white" px="20" onClick={onLoadMore}>
-          Load more
+          {'Load more'.toUpperCase()}
         </Button>
       </Center>
     </Box>

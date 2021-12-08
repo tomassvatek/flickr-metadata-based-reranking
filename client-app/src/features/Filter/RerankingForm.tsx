@@ -143,7 +143,7 @@ function RerankingForm({ onSubmit }: RerankingFormProps) {
             isLoading={isSubmitting}
             type="submit"
           >
-            Re-rank
+            {'Search & Rerank'.toUpperCase()}
           </Button>
         </VStack>
       </form>

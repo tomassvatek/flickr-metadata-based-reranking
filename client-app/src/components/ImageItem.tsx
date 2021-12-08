@@ -42,7 +42,7 @@ function ImageItem({ rank, item, onItemClick }: ImageItemProps) {
           {rank}. {item.metadata.title} by {item.metadata.owner_name}
         </Text>
         <Text fontSize="xs" color="grey.300">
-          Re-ranking score: {Math.round(item.total_score * 10000) / 10000}
+          Reranking score: {Math.round(item.total_score * 10000) / 10000}
         </Text>
       </Box>
     </Box>
