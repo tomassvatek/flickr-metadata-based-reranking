@@ -2,7 +2,7 @@ import { Center, Heading } from '@chakra-ui/react';
 
 function Header() {
   return (
-    <Center mb="10">
+    <Center>
       <Heading as="h2" size="xl">
         Flickr metadata rereranking
       </Heading>
